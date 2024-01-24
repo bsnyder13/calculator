@@ -109,6 +109,10 @@ button {
 	width: 320px
 }
 
+.button:hover {
+	background: #636c7a;
+}
+
 .operator:hover{
 	background: #FFD700;
 }
