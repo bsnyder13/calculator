@@ -11,17 +11,33 @@
         display_number = "";
     }
 
-    function equals() {
-        display_number = Number(display_number);
-        result = operand + display_number
-        display_number = result.toString()
-    }
+	let operator;
+	let operators = ["+", "-", "*", "/"];
 
+	function operation(sign) {
+		operand = Number(display_number);
+		operator = sign;
+		display_number = "";
+	}
+
+	function equals() {
+		display_number = Number(display_number);
+		if (operator === "+") {
+			result = operand + display_number;
+		} else if (operator === "-") {
+			result = operand - display_number;
+		} else if (operator === "*") {
+			result = operand * display_number;
+		} else if (operator === "/") {
+			result = operand / display_number;
+		}
+		display_number = result.toString()
+	}
 	
 </script>
 
 <div class="calculator">
-	<div class="display">{display_number}</div>
+	<div class="display">{display_number.length < 23? display_number: display_number.substring(0,23)}</div>
 	<div class="buttons">
 		<button on:click={select(7)}>7</button>
 		<button on:click={select(8)}>8</button>
@@ -34,12 +50,12 @@
 		<button on:click={select(1)}>1</button>
 		<button on:click={select(2)}>2</button>
 		<button on:click={select(3)}>3</button>
-		<button class="operator">*</button>
+		<button on:click={() => operation(operators[2])} class="operator">*</button>
 		<button on:click={select(0)}>0</button>
 		<button on:click={select(".")}>.</button>
 		<button on:click={clear} class="clear">C</button>
-		<button class="operator">/</button>
-		<button class="equals" >=</button>
+		<button on:click={() => operation(operators[3])} class="operator">/</button>
+		<button on:click={equals} class="equals" >=</button>
 	</div>
 </div>
 
